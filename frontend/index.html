@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Productivity Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Worker Productivity Dashboard</h1>
+            <p class="subtitle">AI-Powered Factory Analytics</p>
+        </div>
+        <div class="header-actions">
+            <button id="refreshBtn" class="btn btn-primary">Refresh Data</button>
+            <button id="seedBtn" class="btn btn-secondary">Reset & Seed Data</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Factory Summary Section -->
+        <section class="factory-summary">
+            <h2>Factory Overview</h2>
+            <div class="metrics-grid" id="factoryMetrics">
+                <div class="metric-card">
+                    <span class="metric-label">Total Productive Hours</span>
+                    <span class="metric-value" id="totalProductiveHours">--</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-label">Total Idle Hours</span>
+                    <span class="metric-value" id="totalIdleHours">--</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-label">Total Units Produced</span>
+                    <span class="metric-value" id="totalProduction">--</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-label">Avg Production Rate</span>
+                    <span class="metric-value" id="avgProductionRate">--</span>
+                    <span class="metric-unit">units/hr</span>
+                </div>
+                <div class="metric-card highlight">
+                    <span class="metric-label">Avg Worker Utilization</span>
+                    <span class="metric-value" id="avgUtilization">--</span>
+                    <span class="metric-unit">%</span>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-label">Active Workers</span>
+                    <span class="metric-value" id="activeWorkers">--</span>
+                </div>
+            </div>
+            <p class="last-updated">Last computed: <span id="factoryComputedAt">--</span></p>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="filter-section">
+            <label for="filterSelect">Filter by:</label>
+            <select id="filterSelect">
+                <option value="all">All Workers & Workstations</option>
+                <optgroup label="Workers" id="workerOptions">
+                </optgroup>
+                <optgroup label="Workstations" id="stationOptions">
+                </optgroup>
+            </select>
+        </section>
+
+        <!-- Workers Section -->
+        <section class="workers-section" id="workersSection">
+            <h2>Worker Metrics</h2>
+            <div class="table-container">
+                <table id="workersTable">
+                    <thead>
+                        <tr>
+                            <th>Worker ID</th>
+                            <th>Name</th>
+                            <th>Active Hours</th>
+                            <th>Idle Hours</th>
+                            <th>Utilization</th>
+                            <th>Units Produced</th>
+                            <th>Units/Hour</th>
+                        </tr>
+                    </thead>
+                    <tbody id="workersTableBody">
+                        <tr><td colspan="7" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Workstations Section -->
+        <section class="workstations-section" id="workstationsSection">
+            <h2>Workstation Metrics</h2>
+            <div class="table-container">
+                <table id="workstationsTable">
+                    <thead>
+                        <tr>
+                            <th>Station ID</th>
+                            <th>Name</th>
+                            <th>Occupancy Hours</th>
+                            <th>Utilization</th>
+                            <th>Units Produced</th>
+                            <th>Throughput Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="workstationsTableBody">
+                        <tr><td colspan="6" class="loading">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Status Messages -->
+        <div id="statusMessage" class="status-message hidden"></div>
+    </main>
+
+    <footer>
+        <p>Worker Productivity Dashboard - AI Camera Event Analytics</p>
+        <p class="api-info">Backend API: <code id="apiUrl">http://localhost:5000</code></p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
